@@ -10,7 +10,7 @@ class ListsContainer extends Component {
     }
     componentDidMount() {
       console.log("hello")
-        axios.get('http://localhost:3001/api/v1/lists')
+        axios.get('http://localhost:3000/api/v1/lists.json')
         .then(response => {
             console.log("hello", response)
             this.setState({
@@ -21,10 +21,17 @@ class ListsContainer extends Component {
     }
 
     render() {
-        return (
-            <div className="Lists-container">
-                Lists
-            </div>
+        return (    
+          <div className="lists-container">
+            {this.state.lists.map( list => {
+              return (
+                <div className="single-list" key={list.id}>
+                  <h4>{list.title}</h4>
+                  <p>{list.excerpt}</p>
+                </div>
+              )
+            })}
+          </div>
         )
     }
 }
